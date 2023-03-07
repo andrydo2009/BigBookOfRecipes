@@ -23,7 +23,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe addRecList(Recipe recipe) {
-        recipeMap.putIfAbsent ( idRec++ , recipe );
+        recipeMap.putIfAbsent ( ++idRec , recipe );
         return recipe;
     }
 
@@ -47,8 +47,8 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void showRecipeList() {
-        recipeMap.forEach ( (key , value) -> System.out.println ( key + " - " + value ) );
+    public Map<Integer, Recipe> showRecipeList() {
+        return recipeMap;
     }
 
 }

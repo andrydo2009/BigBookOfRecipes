@@ -16,9 +16,11 @@ public class IngredientServiceImpl implements IngredientService {
     private static int idIng = 0;
 
 
+
+
     @Override
     public Ingredient addIngList(Ingredient ingList) {
-        ingredientMap.putIfAbsent ( idIng++ , ingList );
+        ingredientMap.putIfAbsent ( ++idIng , ingList );
         return ingList;
     }
 
@@ -47,8 +49,8 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public void showIngredientList() {
-        ingredientMap.forEach ( (key , value) -> System.out.println ( key + " - " + value ) );
+    public Map<Integer, Ingredient> showIngredientList() {
+        return ingredientMap;
     }
 
 }

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import sky.pro.cookbook.model.Recipe;
 import sky.pro.cookbook.service.RecipeService;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/recipe")
 public class RecipesController {
@@ -49,10 +51,9 @@ public class RecipesController {
     }
 
     @GetMapping("/showall")//выводит список всех рецептов
-    public void showAll(){
-        recipeService.showRecipeList ();
-    }
-
+    public ResponseEntity<Map<Integer, Recipe>> showAll(){
+    Map<Integer, Recipe> recipeMap=recipeService.showRecipeList ();
+        return ResponseEntity.ok (recipeMap);}
 
 
 }

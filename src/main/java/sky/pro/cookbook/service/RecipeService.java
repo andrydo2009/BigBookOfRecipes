@@ -3,6 +3,8 @@ package sky.pro.cookbook.service;
 
 import sky.pro.cookbook.model.Recipe;
 
+import java.util.Map;
+
 public interface RecipeService {
 
     Recipe addRecList(Recipe recipe) ;
@@ -12,6 +14,6 @@ public interface RecipeService {
 
     Recipe modifyRecipe(int numeric , Recipe recipe);
 
-    void showRecipeList();
+    Map<Integer, Recipe> showRecipeList();
 
 }
