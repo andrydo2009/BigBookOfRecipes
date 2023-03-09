@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/recipe")
-@Tag(name = " Рецепты ", description = " Операции по работе с рецептами ")
+@Tag(name = " Рецепты ", description = " Операции с рецептами ")
 public class RecipesController {
 
     private final RecipeService recipeService;

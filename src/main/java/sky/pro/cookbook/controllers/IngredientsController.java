@@ -2,6 +2,13 @@ package sky.pro.cookbook.controllers;
 
 
 
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +20,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/ingredient")
-@Tag (name = " Ингредиенты ", description = " Операции по работе с ингредиентами ")
+@Tag (name = " Ингредиенты ", description = " Операции с ингредиентами ")
 public class IngredientsController {
     public IngredientService ingredientService;
 
@@ -22,7 +29,30 @@ public class IngredientsController {
     }
 
     @GetMapping("/show/{numericIng}")// метод получает ингредиент из карты используя параметр из адреса URl
-    public ResponseEntity<Ingredient> showIngredient(@PathVariable int numericIng) {
+    @Operation(
+          summary = "Получаем ингредиент" ,
+            description = "Введите номер ингредиента из списка"
+    )
+    @Parameters(
+
+            value = {
+            @Parameter(name = "Номер ингредиента", example = " Например '1' ")
+    }
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Ингредиент найден",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json"
+                                    )
+                            }
+                    )
+            }
+    )
+    public ResponseEntity<Ingredient> showIngredient(@PathVariable(required = false) int numericIng) {
         Ingredient showNewIngredient = ingredientService.showIngredient ( numericIng );
         if (showNewIngredient == null) {
             return ResponseEntity.notFound ().build ();
