@@ -2,6 +2,7 @@ package sky.pro.cookbook.controllers;
 
 
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sky.pro.cookbook.model.Recipe;
@@ -11,6 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/recipe")
+@Tag(name = " Рецепты ", description = " Операции по работе с рецептами ")
 public class RecipesController {
 
     private final RecipeService recipeService;
