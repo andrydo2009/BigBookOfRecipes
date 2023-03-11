@@ -1,6 +1,5 @@
 package sky.pro.cookbook.service.impl;
 
-
 import org.springframework.stereotype.Service;
 import sky.pro.cookbook.model.Ingredient;
 import sky.pro.cookbook.service.IngredientService;
@@ -16,8 +15,6 @@ public class IngredientServiceImpl implements IngredientService {
     private static int idIng = 0;
 
 
-
-
     @Override
     public Ingredient addIngList(Ingredient ingList) {
         ingredientMap.putIfAbsent ( ++idIng , ingList );
@@ -31,7 +28,7 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public boolean removeIngredient(int numeric) {
-        if (ingredientMap.containsKey ( numeric )){
+        if (ingredientMap.containsKey ( numeric )) {
             ingredientMap.remove ( numeric );
             return true;
         }
@@ -41,7 +38,6 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public Ingredient modifyIngredient(int numeric , Ingredient ingredient) {
         if (ingredientMap.containsKey ( numeric )) {
-            ingredientMap.remove ( numeric );
             ingredientMap.put ( numeric , ingredient );
             return ingredientMap.get ( numeric );
         }
