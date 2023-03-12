@@ -1,6 +1,5 @@
 package sky.pro.cookbook.service;
 
-
 import sky.pro.cookbook.model.Ingredient;
 
 import java.util.Map;

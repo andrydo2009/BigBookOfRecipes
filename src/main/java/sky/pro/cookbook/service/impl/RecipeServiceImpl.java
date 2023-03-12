@@ -1,6 +1,5 @@
 package sky.pro.cookbook.service.impl;
 
-
 import org.springframework.stereotype.Service;
 import sky.pro.cookbook.model.Recipe;
 import sky.pro.cookbook.service.RecipeService;
@@ -10,7 +9,6 @@ import java.util.Map;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
-
 
 
     private static final Map<Integer, Recipe> recipeMap = new HashMap<> ();
@@ -29,7 +27,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public boolean removeRecipe(int numeric) {
-        if (recipeMap.containsKey ( numeric )){
+        if (recipeMap.containsKey ( numeric )) {
             recipeMap.remove ( numeric );
             return true;
         }
@@ -37,10 +35,9 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe modifyRecipe(int numeric , Recipe recipe){
+    public Recipe modifyRecipe(int numeric , Recipe recipe) {
         if (recipeMap.containsKey ( numeric )) {
-            recipeMap.remove ( numeric );
-            recipeMap.put ( numeric , recipe);
+            recipeMap.put ( numeric , recipe );
             return recipeMap.get ( numeric );
         }
         return null;
