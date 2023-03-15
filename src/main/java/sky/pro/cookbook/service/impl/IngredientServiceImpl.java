@@ -16,7 +16,7 @@ import java.util.Map;
 @Service
 public class IngredientServiceImpl implements IngredientService {
     private final IngredientFileService ingredientFileService;
-    private static Map<Integer, Ingredient> ingredientMap = new HashMap<> ();
+    private static Map<Integer, Ingredient> ingredientMap = new HashMap<>();
     private static int idIng = 0;
 
     public IngredientServiceImpl(IngredientFileService ingredientFileService) {
@@ -25,37 +25,37 @@ public class IngredientServiceImpl implements IngredientService {
 
     @PostConstruct // когда метод отмечен этой аннотацией, он будет вызываться сразу после внедрения зависимости
     private void init() {
-        readIngredientFromFile ();
+        readIngredientFromFile();
     }
 
     @Override
     public Ingredient addIngList(Ingredient ingList) {
-        ingredientMap.putIfAbsent ( ++idIng , ingList );
-        saveIngredientToFile ();
+        ingredientMap.putIfAbsent(++idIng, ingList);
+        saveIngredientToFile();
         return ingList;
     }
 
     @Override
     public Ingredient showIngredient(int numeric) {
-        return ingredientMap.get ( numeric );
+        return ingredientMap.get(numeric);
     }
 
     @Override
     public boolean removeIngredient(int numeric) {
-        if (ingredientMap.containsKey ( numeric )) {
-            ingredientMap.remove ( numeric );
-            saveIngredientToFile ();
+        if (ingredientMap.containsKey(numeric)) {
+            ingredientMap.remove(numeric);
+            saveIngredientToFile();
             return true;
         }
         return false;
     }
 
     @Override
-    public Ingredient modifyIngredient(int numeric , Ingredient ingredient) {
-        if (ingredientMap.containsKey ( numeric )) {
-            ingredientMap.put ( numeric , ingredient );
-            saveIngredientToFile ();
-            return ingredientMap.get ( numeric );
+    public Ingredient modifyIngredient(int numeric, Ingredient ingredient) {
+        if (ingredientMap.containsKey(numeric)) {
+            ingredientMap.put(numeric, ingredient);
+            saveIngredientToFile();
+            return ingredientMap.get(numeric);
         }
         return null;
     }
@@ -68,20 +68,20 @@ public class IngredientServiceImpl implements IngredientService {
 
     private void saveIngredientToFile() {
         try {
-            String json = new ObjectMapper ().writeValueAsString ( ingredientMap );
-            ingredientFileService.saveIngredientToFile ( json );
+            String json = new ObjectMapper().writeValueAsString(ingredientMap);
+            ingredientFileService.saveIngredientToFile(json);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException ( e );
+            throw new RuntimeException(e);
         }
     }
 
     private void readIngredientFromFile() {
         try {
-            String json = ingredientFileService.readIngredientFromFile ();
-            ingredientMap = new ObjectMapper ().readValue ( json , new TypeReference<HashMap<Integer, Ingredient>> () {
-            } );
+            String json = ingredientFileService.readIngredientFromFile();
+            ingredientMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
+            });
         } catch (JsonProcessingException e) {
-            throw new RuntimeException ( e );
+            throw new RuntimeException(e);
         }
     }
 
