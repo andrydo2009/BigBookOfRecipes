@@ -1,5 +1,8 @@
 package sky.pro.cookbook.service;
 
+import java.io.File;
+
+
 public interface IngredientFileService {
 
 
@@ -8,4 +11,10 @@ public interface IngredientFileService {
     String readIngredientFromFile();
 
 
+    //Path createTempFile(String suffix);
+
+    boolean cleanIngredientDataFile();
+
+
+    File getDataIngredientFile();
 }
