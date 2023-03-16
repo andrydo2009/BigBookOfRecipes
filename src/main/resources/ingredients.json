@@ -1,0 +1,12 @@
+{
+  "1": {
+    "nameIngredient": "string",
+    "ingredientsQuantity": 0,
+    "measure": "string"
+  },
+  "2": {
+    "nameIngredient": "string1",
+    "ingredientsQuantity": 1,
+    "measure": "string1"
+  }
+}

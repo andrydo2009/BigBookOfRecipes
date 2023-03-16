@@ -1,0 +1,16 @@
+{
+  "1": {
+    "recipeName": "string0",
+    "cookingTime": 0,
+    "ingredientsList": [
+      {
+        "nameIngredient": "string0",
+        "ingredientsQuantity": 0,
+        "measure": "string0"
+      }
+    ],
+    "cookingMethod": [
+      "string0"
+    ]
+  }
+}
