@@ -7,5 +7,4 @@ public interface RecipeFileService {
 
     String readRecipeFromFile();
 
-    boolean cleanRecipeDataFile();
 }

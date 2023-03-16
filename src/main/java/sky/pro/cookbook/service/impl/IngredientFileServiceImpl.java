@@ -40,7 +40,6 @@ public class IngredientFileServiceImpl implements IngredientFileService {
         }
     }
 
-    @Override
     public boolean cleanIngredientDataFile() {
         try {
             Path path = Path.of ( ingredientsFilePath , ingredientsFileName );
