@@ -25,8 +25,8 @@ public class IngredientServiceImpl implements IngredientService {
 
     @PostConstruct // когда метод отмечен этой аннотацией, он будет вызываться сразу после внедрения зависимости
     private void init() {
-        idIng=ingredientMap.size();
         readIngredientFromFile();
+        idIng=ingredientMap.size();
     }
 
     @Override
