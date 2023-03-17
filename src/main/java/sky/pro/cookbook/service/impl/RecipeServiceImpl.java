@@ -25,6 +25,7 @@ public class RecipeServiceImpl implements RecipeService {
     @PostConstruct // когда метод отмечен этой аннотацией, он будет вызываться сразу после внедрения зависимости
     private void init() {
         readRecipeFromFile ();
+        idRec=recipeMap.size();
     }
 
 

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import sky.pro.cookbook.service.RecipeFileService;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,11 +23,11 @@ public class RecipeFileServiceImpl implements RecipeFileService {
     @Override
     public boolean saveRecipeToFile(String json) {
         try {
-            cleanRecipeDataFile ();
-            Files.writeString ( Path.of ( recipesFilePath , recipesFileName ) , json );
+            cleanRecipeDataFile();
+            Files.writeString(Path.of(recipesFilePath, recipesFileName), json);
             return true;
         } catch (IOException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
             return false;
         }
     }
@@ -34,21 +35,26 @@ public class RecipeFileServiceImpl implements RecipeFileService {
     @Override
     public String readRecipeFromFile() {
         try {
-            return Files.readString ( Path.of ( recipesFilePath , recipesFileName ) );
+            return Files.readString(Path.of(recipesFilePath, recipesFileName));
         } catch (IOException e) {
-            throw new RuntimeException ( e );
+            throw new RuntimeException(e);
         }
     }
 
+    @Override
     public boolean cleanRecipeDataFile() {
         try {
-            Path path = Path.of ( recipesFilePath , recipesFileName );
-            Files.deleteIfExists ( path );
-            Files.createFile ( path );
+            Path path = Path.of(recipesFilePath, recipesFileName);
+            Files.deleteIfExists(path);
+            Files.createFile(path);
             return true;
         } catch (IOException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
             return false;
         }
+    }
+    @Override
+    public File getDataRecipeFile() {
+        return new File(recipesFilePath + "/" + recipesFileName);
     }
 }

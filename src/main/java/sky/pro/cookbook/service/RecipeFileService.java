@@ -1,5 +1,7 @@
 package sky.pro.cookbook.service;
 
+import java.io.File;
+
 public interface RecipeFileService {
 
 
@@ -7,4 +9,8 @@ public interface RecipeFileService {
 
     String readRecipeFromFile();
 
+    boolean cleanRecipeDataFile();
+
+
+    File getDataRecipeFile();
 }

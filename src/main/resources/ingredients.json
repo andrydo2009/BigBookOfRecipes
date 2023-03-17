@@ -1,12 +1,17 @@
 {
   "1": {
-    "nameIngredient": "string",
-    "ingredientsQuantity": 0,
-    "measure": "string"
+    "nameIngredient": "Творог",
+    "ingredientsQuantity": 10,
+    "measure": " г."
   },
   "2": {
-    "nameIngredient": "string1",
-    "ingredientsQuantity": 1,
-    "measure": "string1"
+    "nameIngredient": "Яйцо куриное",
+    "ingredientsQuantity": 10,
+    "measure": " шт."
+  },
+  "3": {
+    "nameIngredient": "Пшеничная мука",
+    "ingredientsQuantity": 10,
+    "measure": " ст. л."
   }
 }
