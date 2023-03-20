@@ -27,8 +27,6 @@ public class RecipeServiceImpl implements RecipeService {
         readRecipeFromFile ();
         idRec=recipeMap.size();
     }
-
-
     @Override
     public Recipe showRecList(int numeric) {
         return recipeMap.get ( numeric );
