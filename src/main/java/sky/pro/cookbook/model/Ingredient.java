@@ -17,3 +17,4 @@ public class Ingredient {
     private  String measure;                                                                                       // мера измерения ингредиента
 
 }
+//
