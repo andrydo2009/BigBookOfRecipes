@@ -11,7 +11,6 @@ public interface IngredientFileService {
     String readIngredientFromFile();
 
 
-    //Path createTempFile(String suffix);
 
     boolean cleanIngredientDataFile();
 

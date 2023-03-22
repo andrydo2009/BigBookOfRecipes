@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-
+//
 @Data
 // аннотация содержит все необходимые методы для создания объекта класса(equal,toString and ...)
 @AllArgsConstructor
