@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 //автоматическая генерация не параметризованного конструктора
 @JsonIgnoreProperties(ignoreUnknown = true)
-//указывает механизмам десериализации Jackson игнорировать поля в JSON-ответах,
-// для которых несуществует соответствующей переменной экземпляра.
+// указывает механизмам десериализации Jackson игнорировать поля в JSON-ответах,
+// для которых не существует соответствующей переменной экземпляра.
 public class Ingredient {
 
     private  String nameIngredient;                                                                                // название ингредиента
