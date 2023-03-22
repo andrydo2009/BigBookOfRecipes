@@ -1,6 +1,7 @@
 package sky.pro.cookbook.service;
 
 import java.io.File;
+import java.nio.file.Path;
 
 public interface RecipeFileService {
 
@@ -13,4 +14,6 @@ public interface RecipeFileService {
 
 
     File getDataRecipeFile();
+
+    Path createTempFile(String suffix);
 }

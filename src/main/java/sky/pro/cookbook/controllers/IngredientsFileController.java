@@ -29,9 +29,9 @@ public class IngredientsFileController {
             InputStreamResource resource = new InputStreamResource(new FileInputStream(loadFile));
             // FileInputStream открываем поток
             return ResponseEntity.ok()
-                    //.contentType(MediaType.APPLICATION_OCTET_STREAM)//указываем что пеедаем поток байт
-                    .contentType(MediaType.APPLICATION_JSON)//указываем что пеедаем поток байт
-                    .contentLength(loadFile.length())//указываем длинну файла
+                    //.contentType(MediaType.APPLICATION_OCTET_STREAM)//указываем что передаем поток байт
+                    .contentType(MediaType.APPLICATION_JSON)//указываем что передаем поток байт
+                    .contentLength(loadFile.length())//указываем длину файла
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"ingredinets.json\"")
                     .body(resource);//возвращаем в теле ответа файл
         } else {

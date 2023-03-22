@@ -3,6 +3,7 @@ package sky.pro.cookbook.service.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 import sky.pro.cookbook.model.Ingredient;
 import sky.pro.cookbook.service.IngredientFileService;
@@ -38,6 +39,7 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public Ingredient showIngredient(int numeric) {
+        ObjectUtils.isNotEmpty(ingredientMap);
         return ingredientMap.get(numeric);
     }
 
@@ -63,6 +65,7 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public Map<Integer, Ingredient> showIngredientList() {
+        ObjectUtils.isNotEmpty(ingredientMap);
         return ingredientMap;
     }
 

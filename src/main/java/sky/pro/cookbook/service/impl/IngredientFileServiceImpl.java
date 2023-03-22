@@ -41,14 +41,7 @@ public class IngredientFileServiceImpl implements IngredientFileService {
         }
     }
 
-//    @Override
-//    public Path createTempFile(String suffix) {
-//        try {
-//            return Files.createTempFile(Path.of(ingredientsFilePath), "tempFile", suffix);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+
 
     @Override
     public boolean cleanIngredientDataFile() {

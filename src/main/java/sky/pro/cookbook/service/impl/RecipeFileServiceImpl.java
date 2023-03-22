@@ -23,11 +23,11 @@ public class RecipeFileServiceImpl implements RecipeFileService {
     @Override
     public boolean saveRecipeToFile(String json) {
         try {
-            cleanRecipeDataFile();
-            Files.writeString(Path.of(recipesFilePath, recipesFileName), json);
+            cleanRecipeDataFile ();//подготавливаем файл
+            Files.writeString ( Path.of ( recipesFilePath , recipesFileName ) , json ); // записывает файл в строку
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace ();
             return false;
         }
     }
@@ -35,26 +35,38 @@ public class RecipeFileServiceImpl implements RecipeFileService {
     @Override
     public String readRecipeFromFile() {
         try {
-            return Files.readString(Path.of(recipesFilePath, recipesFileName));
+            return Files.readString ( Path.of ( recipesFilePath , recipesFileName ) ); // метод читает файл, в скобках укзано имя и путь
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException ( e );
         }
     }
 
     @Override
-    public boolean cleanRecipeDataFile() {
+    public boolean cleanRecipeDataFile() { //метод удаляет/обновляет файл
         try {
-            Path path = Path.of(recipesFilePath, recipesFileName);
-            Files.deleteIfExists(path);
-            Files.createFile(path);
+            Path path = Path.of ( recipesFilePath , recipesFileName ); // class Path предназначен для работы с файлами, в скобках имя файла затем путь
+            Files.deleteIfExists ( path );// удаляем старый файл если он есть
+            Files.createFile ( path );// создаем новый файл
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace ();
             return false;
         }
     }
+
     @Override
     public File getDataRecipeFile() {
-        return new File(recipesFilePath + "/" + recipesFileName);
+        return new File ( recipesFilePath + "/" + recipesFileName );
     }
+
+
+    @Override
+    public Path createTempFile(String suffix) {
+        try {
+            return Files.createTempFile ( Path.of ( recipesFilePath ) , "tempFile" , suffix ); //генерируем временный файл
+        } catch (IOException e) {
+            throw new RuntimeException ( e );
+        }
+    }
+
 }

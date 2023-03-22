@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import sky.pro.cookbook.service.RecipeFileService;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @RestController
 @RequestMapping("/file/recipe")
@@ -28,9 +30,9 @@ public class RecipesFileController {
             InputStreamResource resource = new InputStreamResource(new FileInputStream(loadFile));
             // FileInputStream открываем поток
             return ResponseEntity.ok()
-                    //.contentType(MediaType.APPLICATION_OCTET_STREAM)//указываем что пеедаем поток байт
-                    .contentType(MediaType.APPLICATION_JSON)//указываем что пеедаем поток байт
-                    .contentLength(loadFile.length())//указываем длинну файла
+                    //.contentType(MediaType.APPLICATION_OCTET_STREAM)//указываем что передаем поток байт
+                    .contentType(MediaType.APPLICATION_JSON)//указываем что передаем поток байт
+                    .contentLength(loadFile.length())//указываем длину файла
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"recipes.json\"")
                     .body(resource);//возвращаем в теле ответа файл
         } else {
@@ -50,4 +52,6 @@ public class RecipesFileController {
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
+
+
 }

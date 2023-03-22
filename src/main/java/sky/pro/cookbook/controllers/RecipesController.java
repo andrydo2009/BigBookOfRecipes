@@ -9,11 +9,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sky.pro.cookbook.model.Recipe;
 import sky.pro.cookbook.service.RecipeService;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
 
 @RestController
@@ -235,6 +243,24 @@ public class RecipesController {
         return ResponseEntity.ok ( recipeMap );
     }
 
+    @GetMapping("/export/user")
+    public ResponseEntity<Object> downloadUserFileRecipe() throws FileNotFoundException {
+        try {
+            Path path = recipeService.createUserFileRecipe ();
+            if (Files.size ( path ) == 0) {
+                return ResponseEntity.noContent ().build ();
+            }
+            InputStreamResource resource = new InputStreamResource ( new FileInputStream ( path.toFile () ) );
+            return ResponseEntity.ok ()
+                    .contentType ( MediaType.TEXT_PLAIN )
+                    .contentLength ( Files.size ( path ) )
+                    .header ( HttpHeaders.CONTENT_DISPOSITION , "attachment; filename=\"report.txt\"" )
+                    .body ( resource );
+        } catch (IOException e) {
+            e.printStackTrace ();
+            return ResponseEntity.internalServerError ().body ( e.toString () );
+        }
 
+    }
 }
 
