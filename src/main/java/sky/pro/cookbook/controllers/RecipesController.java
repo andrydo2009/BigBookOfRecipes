@@ -9,11 +9,18 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sky.pro.cookbook.model.Recipe;
 import sky.pro.cookbook.service.RecipeService;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
 
 @RestController
@@ -50,7 +57,7 @@ public class RecipesController {
                                             @Schema(implementation = Recipe.class))
                                     )
                             }
-                    ),
+                    ) ,
                     @ApiResponse(
                             responseCode = "404",
                             description = "Рецепт не найден. Проверьте правильность ввода номера рецепта.",
@@ -61,6 +68,10 @@ public class RecipesController {
                                             @Schema(implementation = Recipe.class))
                                     )
                             }
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
                     )
 
             }
@@ -89,7 +100,7 @@ public class RecipesController {
                                             @Schema(implementation = Recipe.class))
                                     )
                             }
-                    ),
+                    ) ,
                     @ApiResponse(
                             responseCode = "404",
                             description = "Рецепт не получилось добавить в список",
@@ -100,6 +111,10 @@ public class RecipesController {
                                             @Schema(implementation = Recipe.class))
                                     )
                             }
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
                     )
 
             }
@@ -131,7 +146,7 @@ public class RecipesController {
                                             @Schema(implementation = Recipe.class))
                                     )
                             }
-                    ),
+                    ) ,
                     @ApiResponse(
                             responseCode = "404",
                             description = "Рецепт не получилось изменить",
@@ -142,6 +157,10 @@ public class RecipesController {
                                             @Schema(implementation = Recipe.class))
                                     )
                             }
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
                     )
 
             }
@@ -176,7 +195,7 @@ public class RecipesController {
                                             @Schema(implementation = Recipe.class))
                                     )
                             }
-                    ),
+                    ) ,
                     @ApiResponse(
                             responseCode = "404",
                             description = "Рецепт не получилось удалить",
@@ -187,6 +206,10 @@ public class RecipesController {
                                             @Schema(implementation = Recipe.class))
                                     )
                             }
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
                     )
 
             }
@@ -215,7 +238,7 @@ public class RecipesController {
                                             @Schema(implementation = Recipe.class))
                                     )
                             }
-                    ),
+                    ) ,
                     @ApiResponse(
                             responseCode = "404",
                             description = "Список не доступен",
@@ -226,6 +249,10 @@ public class RecipesController {
                                             @Schema(implementation = Recipe.class))
                                     )
                             }
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
                     )
 
             }
@@ -236,5 +263,51 @@ public class RecipesController {
     }
 
 
+    @GetMapping("/export/user")
+    @Operation(
+            summary = "Скачивание файла",
+            description = "Скачиваем  список всех рецептов в текстовом файле"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Загрузка файла прошла успешно",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/txt",
+                                            array = @ArraySchema(schema =
+                                            @Schema(implementation = Recipe.class))
+                                    )
+                            }
+                    ) ,
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Загрузка файла не удалась"
+                    ) ,
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
+                    )
+
+            }
+    )
+    public ResponseEntity<Object> downloadUserFileRecipe(){
+        try {
+            Path path = recipeService.createUserFileRecipe ();
+            if (Files.size ( path ) == 0) {
+                return ResponseEntity.noContent ().build ();
+            }
+            InputStreamResource resource = new InputStreamResource ( new FileInputStream ( path.toFile () ) );
+            return ResponseEntity.ok ()
+                    .contentType ( MediaType.TEXT_PLAIN )
+                    .contentLength ( Files.size ( path ) )
+                    .header ( HttpHeaders.CONTENT_DISPOSITION , "attachment; filename=\"recipesForUser.txt\"" )
+                    .body ( resource );
+        } catch (IOException e) {
+            e.printStackTrace ();
+            return ResponseEntity.internalServerError ().body ( e.toString () );
+        }
+    }
 }
 

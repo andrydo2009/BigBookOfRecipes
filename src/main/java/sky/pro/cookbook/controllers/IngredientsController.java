@@ -16,7 +16,6 @@ import sky.pro.cookbook.service.IngredientService;
 
 import java.util.Map;
 
-
 @RestController
 @RequestMapping("/ingredient")
 @Tag(name = " Ингредиенты ", description = " Операции с ингредиентами ")
@@ -61,6 +60,10 @@ public class IngredientsController {
                                             @Schema(implementation = Ingredient.class))
                                     )
                             }
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
                     )
 
             }
@@ -100,6 +103,10 @@ public class IngredientsController {
                                             @Schema(implementation = Ingredient.class))
                                     )
                             }
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
                     )
 
             }
@@ -142,6 +149,10 @@ public class IngredientsController {
                                             @Schema(implementation = Ingredient.class))
                                     )
                             }
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
                     )
 
             }
@@ -187,6 +198,10 @@ public class IngredientsController {
                                             @Schema(implementation = Ingredient.class))
                                     )
                             }
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
                     )
 
             }

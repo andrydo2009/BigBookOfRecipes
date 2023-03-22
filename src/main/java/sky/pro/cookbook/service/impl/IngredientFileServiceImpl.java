@@ -1,5 +1,6 @@
 package sky.pro.cookbook.service.impl;
 
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import sky.pro.cookbook.service.IngredientFileService;
@@ -41,14 +42,7 @@ public class IngredientFileServiceImpl implements IngredientFileService {
         }
     }
 
-//    @Override
-//    public Path createTempFile(String suffix) {
-//        try {
-//            return Files.createTempFile(Path.of(ingredientsFilePath), "tempFile", suffix);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+
 
     @Override
     public boolean cleanIngredientDataFile() {

@@ -2,6 +2,8 @@ package sky.pro.cookbook.service;
 
 import sky.pro.cookbook.model.Recipe;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Map;
 
 public interface RecipeService {
@@ -16,4 +18,6 @@ public interface RecipeService {
 
     Map<Integer, Recipe> showRecipeList();
 
+
+    Path createUserFileRecipe() throws IOException;
 }
