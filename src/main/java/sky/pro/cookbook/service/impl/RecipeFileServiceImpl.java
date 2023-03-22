@@ -1,5 +1,6 @@
 package sky.pro.cookbook.service.impl;
 
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import sky.pro.cookbook.service.RecipeFileService;
@@ -70,4 +71,3 @@ public class RecipeFileServiceImpl implements RecipeFileService {
     }
 
 }
-//

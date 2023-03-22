@@ -1,5 +1,6 @@
 package sky.pro.cookbook.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,9 @@ import java.util.ArrayList;
 // аннотация создания конструктора со всеми параметрами
 @NoArgsConstructor
 //автоматическая генерация не параметризованного конструктора
+@JsonIgnoreProperties(ignoreUnknown = true)
+//указывает механизмам десериализации Jackson игнорировать поля в JSON-ответах,
+//для которых несуществует соответствующей переменной экземпляра.
 public class Recipe {
 
 
@@ -21,5 +25,3 @@ public class Recipe {
     private ArrayList<String> cookingMethod;                                                                      // способ приготовления, список шагов
 
 }
-
-//
