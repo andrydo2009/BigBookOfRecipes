@@ -110,6 +110,7 @@ public class RecipeServiceImpl implements RecipeService {
                     try {
                         writer.append ( ingredient.getNameIngredient () ).append ( " " ).append ( String.valueOf ( ingredient.getIngredientsQuantity () ) ).append ( " " ).append ( ingredient.getMeasure () );
                         writer.append ( "\n" );
+
                     } catch (IOException e) {
                         throw new RuntimeException ( e );
                     }
