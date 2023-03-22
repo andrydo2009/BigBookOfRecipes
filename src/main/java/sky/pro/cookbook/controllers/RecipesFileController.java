@@ -1,5 +1,12 @@
 package sky.pro.cookbook.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -8,14 +15,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import sky.pro.cookbook.model.Recipe;
 import sky.pro.cookbook.service.RecipeFileService;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 @RestController
 @RequestMapping("/file/recipe")
+@Tag(name = " Работа с файлами ", description = " Операции с файлами рецептами ")
 public class RecipesFileController {
     private  final RecipeFileService recipeFileService;
 
@@ -23,6 +30,34 @@ public class RecipesFileController {
         this.recipeFileService = recipeFileService;
     }
     @GetMapping("/export")
+    @Operation(
+            summary = "Скачивание файла",
+            description = "Скачиваем  список всех рецептов в JSON формате"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Загрузка файла прошла успешно",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(schema =
+                                            @Schema(implementation = Recipe.class))
+                                    )
+                            }
+                    ) ,
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Загрузка файла не удалась"
+                    ) ,
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
+                    )
+
+            }
+    )
     public ResponseEntity<InputStreamResource> downloadRecipeFile() throws FileNotFoundException {
         File loadFile = recipeFileService.getDataRecipeFile();
         if (loadFile.exists())//проверяем что файл существует
@@ -41,6 +76,34 @@ public class RecipesFileController {
     }
 
     @PostMapping(value = "/import",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(
+            summary = "Загрузка файла",
+            description = "Загружаем список всех рецептов в JSON формате"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Загрузка файла прошла успешно",
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            array = @ArraySchema(schema =
+                                            @Schema(implementation = Recipe.class))
+                                    )
+                            }
+                    ) ,
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Загрузка файла не удалась"
+                    ) ,
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
+                    )
+
+            }
+    )
     public ResponseEntity<Void> uploadRecipeFile(@RequestParam MultipartFile file) {
         recipeFileService.cleanRecipeDataFile();
         File uploadFile = recipeFileService.getDataRecipeFile();

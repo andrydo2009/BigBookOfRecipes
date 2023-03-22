@@ -61,6 +61,10 @@ public class IngredientsController {
                                             @Schema(implementation = Ingredient.class))
                                     )
                             }
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
                     )
 
             }
@@ -100,6 +104,10 @@ public class IngredientsController {
                                             @Schema(implementation = Ingredient.class))
                                     )
                             }
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
                     )
 
             }
@@ -142,6 +150,10 @@ public class IngredientsController {
                                             @Schema(implementation = Ingredient.class))
                                     )
                             }
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
                     )
 
             }
@@ -187,6 +199,10 @@ public class IngredientsController {
                                             @Schema(implementation = Ingredient.class))
                                     )
                             }
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Во время выполнения запроса произошла ошибка на сервере"
                     )
 
             }
