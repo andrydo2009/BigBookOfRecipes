@@ -15,7 +15,6 @@ import sky.pro.cookbook.model.Ingredient;
 import sky.pro.cookbook.service.IngredientService;
 
 import java.util.Map;
-//
 
 @RestController
 @RequestMapping("/ingredient")

@@ -19,7 +19,7 @@ import sky.pro.cookbook.model.Ingredient;
 import sky.pro.cookbook.service.IngredientFileService;
 
 import java.io.*;
-//
+
 @RestController
 @RequestMapping("/file/ingredient")
 @Tag(name = " Работа с файлами ", description = " Операции с файлами ингредиентами ")
